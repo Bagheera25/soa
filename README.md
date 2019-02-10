@@ -6,4 +6,4 @@ Project architecture
 
 BPMN
 
-![alt text](https://imgur.com/d32zmOZ)
+[Imgur](https://i.imgur.com/d32zmOZ.png)
