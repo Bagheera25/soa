@@ -8,9 +8,9 @@ soa project with docker containers
 ## Details
 
 This project allows you to:
-    - register a new account
-    - create a recipe
-    - search for a recipe
+- register a new account
+- create a recipe
+- search for a recipe
 
 ### Project architecture
 ![alt text](https://i.imgur.com/zl3E48L.png)
