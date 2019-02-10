@@ -1,19 +1,19 @@
 # soa
 soa project with docker containers
 
-##Patterns used in this project:
+## Patterns used in this project:
     - Authentication broker
     - Adapter
 
-##Details
+## Details
 
 This project allows you to:
     - register a new account
     - create a recipe
     - search for a recipe
 
-###Project architecture
+### Project architecture
 ![alt text](https://i.imgur.com/zl3E48L.png)
 
-###BPMN
+### BPMN
 ![alt text](https://i.imgur.com/d32zmOZ.png)
