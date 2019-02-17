@@ -22,5 +22,7 @@ This project allows you to:
 
 ## Run the application
 
-In order to run the api's you need to run the following command: docker-compose up
-To run the frontend application you need to run the command: ng serve
+Commands:
+
+- In order to run the api's you need to run the following command: docker-compose up
+- To run the frontend application you need to run the command: ng serve
