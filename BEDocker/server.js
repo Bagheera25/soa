@@ -5,9 +5,17 @@ const app = express();
 const http = require('http');
 
 var Recipe = require('./models/recipe.model');
+var User = require('./models/user.model');
 
 const mongoose = require('mongoose');
 var db_url = 'mongodb://mada25:sylvanas25@ds223015.mlab.com:23015/recipesdb'
+
+var db_user_url = 'mongodb://mada:blizzard2@ds223015.mlab.com:23015/recipesdb'
+const userMongoDb = db_user_url;
+mongoose.connect(userMongoDb);
+mongoose.Promise = global.Promise;
+var userDb = mongoose.connection;
+userDb.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 const mongoDB = db_url;
 mongoose.connect(mongoDB);
@@ -42,22 +50,35 @@ createRecipe = function (req, res) {
 
 app.post('/create', createRecipe)
 
-// app.route('/recipes').get((req, res) => {
-//   https.get('https://api.mlab.com/api/1/databases/recipesdb/collections/recipes?apiKey=gihwyXe6hsduWthTR-EVouvV9ZcsX5yT', (resp) => {
-//   let data = '';
+app.post('/login', (req, res) => {
+  User.findOne({ username: req.body.username }, (err, user) => {
+    if (!user) {
+      return res.status(422).send({ message: 'Credentials invalid!' });
+    }
 
-//   // A chunk of data has been recieved.
-//   resp.on('data', (chunk) => {
-//     data += chunk;
-//   });
+    const token = req.body.username + req.body.password;
 
-//   // The whole response has been received. Print out the result.
-//   resp.on('end', () => {
-//     res.json(data);
-//   });
-//   }).on("error", (err) => {
-//     console.log("Error: " + err.message);
-//   });
-// });
+    return res.status(200).send({ token: token });
+  });
+
+});
+
+app.route('/recipes').get((req, res) => {
+  https.get('https://api.mlab.com/api/1/databases/recipesdb/collections/recipes?apiKey=gihwyXe6hsduWthTR-EVouvV9ZcsX5yT', (resp) => {
+    let data = '';
+
+    // A chunk of data has been recieved.
+    resp.on('data', (chunk) => {
+      data += chunk;
+    });
+
+    // The whole response has been received. Print out the result.
+    resp.on('end', () => {
+      res.json(data);
+    });
+  }).on("error", (err) => {
+    console.log("Error: " + err.message);
+  });
+});
 
 module.exports = app;

@@ -13,7 +13,7 @@ export class AppComponent {
   constructor(private getDataService: AppService) {}
 
   getData() {
-    this.getDataService.getData().subscribe(data => {
+    this.getDataService.getTestData().subscribe(data => {
       console.log(data);
     })
   }
